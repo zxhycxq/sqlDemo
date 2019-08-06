@@ -2,9 +2,12 @@ var expres = require ('express')
 var bodyParse = require ('body-parser')
 var fs = require ('fs')
 var multer = require ('multer')
+var ejs = require('ejs');
 // var upload = multer ({dest: 'uploads/'})
 
 var app = expres ()
+app.set('view engine','ejs')
+
 var createFolder = function (folder) {
   try {
     fs.accessSync (folder)
@@ -51,12 +54,19 @@ app.get ('/ab?cd', function (req, res) {
   res.send ('ab?cd')
 })
 
-app.get ('/form', function (req, res) {
-  var form = fs.readFileSync ('./form.html', {
+app.get ('/form/:name', function (req, res) {
+ /* var form = fs.readFileSync ('./form.html', {
     encoding: 'utf8'
   })
-  // console.log (`%c--222-- `, 'color:blue;', form)
-  res.send (form)
+  res.send (form)*/
+ 
+ // var person=req.params.name;
+ // res.sendFile(__dirname+'/form.html')
+ // res.render('form',{person:person})
+  var data={age:23,homepage: ["知乎","简书"]}
+  res.render('form',{data:data})
+ 
+ 
 })
 /*app.post ('/', urlencodeParser, function (req, res) {
   // console.log (`%c---- `, 'color:blue;', req.query)
