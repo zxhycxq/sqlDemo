@@ -8,6 +8,8 @@ var path = require("path");
 //app.use(express.static(__dirname + '/public'));
 var app = expres ()
 app.set('view engine','ejs')
+app.use(expres.static('static'))
+// app.use('/assets',expres.static('static'))
 app.set('views', path.join(__dirname, 'views'));
 var createFolder = function (folder) {
   try {
