@@ -3,11 +3,12 @@ var bodyParse = require ('body-parser')
 var fs = require ('fs')
 var multer = require ('multer')
 var ejs = require('ejs');
+var path = require("path");
 // var upload = multer ({dest: 'uploads/'})
-
+//app.use(express.static(__dirname + '/public'));
 var app = expres ()
 app.set('view engine','ejs')
-
+app.set('views', path.join(__dirname, 'views'));
 var createFolder = function (folder) {
   try {
     fs.accessSync (folder)
@@ -81,6 +82,10 @@ app.get ('/form/:name', function (req, res) {
 app.post ('/upload', upload.single ('logo'), function (req, res) {
   console.dir (req.file)
   res.send ({'res_code': 0})
+})
+
+app.post('/views/about',function (req,res) {
+  res.render('about')
 })
 
 app.listen (3000)
